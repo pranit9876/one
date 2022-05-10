@@ -1,0 +1,1184 @@
+******************************************************************  1   *****************************************************************************
+Write a program to demonstrate status of key on an Applet window such as KeyPressed, KeyReleased, KeyUp, KeyDown.
+
+-> import java.awt.*;
+import java.applet.*;
+import java.awt.event.*;
+public class KeyEventDemo extends Applet implements KeyListener
+{
+    String msg = "";
+ 
+    public void init()
+    {
+        addKeyListener(this);
+    }
+ 
+    public void keyReleased(KeyEvent k)
+    {
+        showStatus("Key Released");
+        repaint();
+    }
+ 
+    public void keyTyped(KeyEvent k)
+    {
+        showStatus("Key Typed");
+        repaint();
+    }
+ 
+    public void keyPressed(KeyEvent k)
+    {
+        showStatus("Key Pressed");
+        repaint();
+    }
+ 
+    public void paint(Graphics g)
+    {
+        g.drawString(msg, 10, 10);
+    }
+}
+
+
+
+
+
+
+
+*********************************************************************** 2 *************************************************************************************
+
+ 2Write a program to create a frame using AWT. Implement mouseClicked, mouseEntered() and mouseExited() events. Frame should become visible when the mouse enters it.
+
+->
+/**** Main.java ****/
+import java.awt.*;
+import java.awt.event.*;
+public class Main extends Frame implements MouseListener {
+Label l;
+Main() {
+super("AWT Frame");
+l = new Label();
+l.setBounds(25, 60, 250, 30);
+l.setAlignment(Label.CENTER);
+this.add(l);
+this.setSize(300, 300);
+this.setLayout(null);
+this.setVisible(true);
+this.addMouseListener(this);
+this.addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent e) {
+dispose();
+}
+});
+}
+public static void main(String[] args) {
+new Main();
+}
+@Override
+public void mouseClicked(MouseEvent e) {
+l.setText("Mouse Clicked");
+}
+@Override
+public void mousePressed(MouseEvent e) {
+}
+@Override
+public void mouseReleased(MouseEvent e) {
+}
+@Override
+public void mouseEntered(MouseEvent e) {
+l.setText("Mouse Entered");
+
+}
+@Override
+public void mouseExited(MouseEvent e) {
+l.setText("Mouse Exited");
+}
+}
+
+
+
+
+
+****************************************************** 3 *************************************************************************************************
+
+3. Create different shapes and fill the colours using Applet ?
+
+->
+/*Java Program to Create and Fill Shapes using Applet*/
+import java.applet.*;
+import java.awt.*;
+public class Shapes extends Applet
+{
+    //Function to initialize the applet
+    public void init()
+    {
+	setBackground(Color.white);
+    }
+    //Function to draw and fill shapes
+    public void paint(Graphics g)
+    {
+	//Draw a square
+	g.setColor(Color.black);
+	g.drawString("Square",75,200);
+	int x[]={50,150,150,50};
+	int y[]={50,50,150,150};
+	g.drawPolygon(x,y,4);
+	g.setColor(Color.yellow);
+	g.fillPolygon(x,y,4);
+	//Draw a pentagon
+	g.setColor(Color.black);
+	g.drawString("Pentagon",225,200);
+	x=new int[]{200,250,300,300,250,200};
+	y=new int[]{100,50,100,150,150,100};
+	g.drawPolygon(x,y,6);
+	g.setColor(Color.yellow);
+	g.fillPolygon(x,y,6);
+	//Draw a circle
+	g.setColor(Color.black);
+	g.drawString("Circle",400,200);
+	g.drawOval(350,50,125,125);
+	g.setColor(Color.yellow);
+	g.fillOval(350,50,125,125);	
+	//Draw an oval
+	g.setColor(Color.black);
+	g.drawString("Oval",100,380);
+	g.drawOval(50,250,150,100);
+	g.setColor(Color.yellow);
+	g.fillOval(50,250,150,100);	
+	//Draw a rectangle
+	g.setColor(Color.black);
+	g.drawString("Rectangle",300,380);
+	x=new int[]{250,450,450,250};
+	y=new int[]{250,250,350,350};
+	g.drawPolygon(x,y,4);
+	g.setColor(Color.yellow);
+	g.fillPolygon(x,y,4);
+	//Draw a triangle
+	g.setColor(Color.black);
+	g.drawString("Traingle",100,525);
+	x=new int[]{50,50,200};
+	y=new int[]{500,400,500};
+	g.drawPolygon(x,y,3);
+	g.setColor(Color.yellow);
+	g.fillPolygon(x,y,3);
+    }
+}
+
+
+
+
+*********************************************************************** 4 *************************************************************************************
+4. Design a GUI calculator using JAVA swings.
+-> 
+// Java program to create a simple calculator
+// with basic +, -, /, * using java swing elements
+
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.*;
+class calculator extends JFrame implements ActionListener {
+	// create a frame
+	static JFrame f;
+
+	// create a textfield
+	static JTextField l;
+
+	// store operator and operands
+	String s0, s1, s2;
+
+	// default constructor
+	calculator()
+	{
+		s0 = s1 = s2 = "";
+	}
+
+	// main function
+	public static void main(String args[])
+	{
+		// create a frame
+		f = new JFrame("calculator");
+
+		try {
+			// set look and feel
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		// create a object of class
+		calculator c = new calculator();
+
+		// create a textfield
+		l = new JTextField(16);
+
+		// set the textfield to non editable
+		l.setEditable(false);
+
+		// create number buttons and some operators
+		JButton b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, ba, bs, bd, bm, be, beq, beq1;
+
+		// create number buttons
+		b0 = new JButton("0");
+		b1 = new JButton("1");
+		b2 = new JButton("2");
+		b3 = new JButton("3");
+		b4 = new JButton("4");
+		b5 = new JButton("5");
+		b6 = new JButton("6");
+		b7 = new JButton("7");
+		b8 = new JButton("8");
+		b9 = new JButton("9");
+
+		// equals button
+		beq1 = new JButton("=");
+
+		// create operator buttons
+		ba = new JButton("+");
+		bs = new JButton("-");
+		bd = new JButton("/");
+		bm = new JButton("*");
+		beq = new JButton("C");
+
+		// create . button
+		be = new JButton(".");
+
+		// create a panel
+		JPanel p = new JPanel();
+
+		// add action listeners
+		bm.addActionListener(c);
+		bd.addActionListener(c);
+		bs.addActionListener(c);
+		ba.addActionListener(c);
+		b9.addActionListener(c);
+		b8.addActionListener(c);
+		b7.addActionListener(c);
+		b6.addActionListener(c);
+		b5.addActionListener(c);
+		b4.addActionListener(c);
+		b3.addActionListener(c);
+		b2.addActionListener(c);
+		b1.addActionListener(c);
+		b0.addActionListener(c);
+		be.addActionListener(c);
+		beq.addActionListener(c);
+		beq1.addActionListener(c);
+
+		// add elements to panel
+		p.add(l);
+		p.add(ba);
+		p.add(b1);
+		p.add(b2);
+		p.add(b3);
+		p.add(bs);
+		p.add(b4);
+		p.add(b5);
+		p.add(b6);
+		p.add(bm);
+		p.add(b7);
+		p.add(b8);
+		p.add(b9);
+		p.add(bd);
+		p.add(be);
+		p.add(b0);
+		p.add(beq);
+		p.add(beq1);
+
+		// set Background of panel
+		p.setBackground(Color.blue);
+
+		// add panel to frame
+		f.add(p);
+
+		f.setSize(200, 220);
+		f.show();
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		String s = e.getActionCommand();
+
+		// if the value is a number
+		if ((s.charAt(0) >= '0' && s.charAt(0) <= '9') || s.charAt(0) == '.') {
+			// if operand is present then add to second no
+			if (!s1.equals(""))
+				s2 = s2 + s;
+			else
+				s0 = s0 + s;
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+		else if (s.charAt(0) == 'C') {
+			// clear the one letter
+			s0 = s1 = s2 = "";
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+		else if (s.charAt(0) == '=') {
+
+			double te;
+
+			// store the value in 1st
+			if (s1.equals("+"))
+				te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+			else if (s1.equals("-"))
+				te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+			else if (s1.equals("/"))
+				te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+			else
+				te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+
+			// set the value of text
+			l.setText(s0 + s1 + s2 + "=" + te);
+
+			// convert it to string
+			s0 = Double.toString(te);
+
+			s1 = s2 = "";
+		}
+		else {
+			// if there was no operand
+			if (s1.equals("") || s2.equals(""))
+				s1 = s;
+			// else evaluate
+			else {
+				double te;
+
+				// store the value in 1st
+				if (s1.equals("+"))
+					te = (Double.parseDouble(s0) + Double.parseDouble(s2));
+				else if (s1.equals("-"))
+					te = (Double.parseDouble(s0) - Double.parseDouble(s2));
+				else if (s1.equals("/"))
+					te = (Double.parseDouble(s0) / Double.parseDouble(s2));
+				else
+					te = (Double.parseDouble(s0) * Double.parseDouble(s2));
+
+				// convert it to string
+				s0 = Double.toString(te);
+
+				// place the operator
+				s1 = s;
+
+				// make the operand blank
+				s2 = "";
+			}
+
+			// set the value of text
+			l.setText(s0 + s1 + s2);
+		}
+	}
+}
+
+
+
+
+*********************************************************************** 5 *************************************************************************************
+5. Write an AWT GUI application (called AWTCounter) . Each time the "Count" button is clicked, the counter value shall increase by 1.
+->
+import java.awt.*;        // Using AWT container and component classes
+import java.awt.event.*;  // Using AWT event classes and listener interfaces
+
+// An AWT program inherits from the top-level container java.awt.Frame
+public class AWTCounter extends Frame {
+   private Label lblCount;    // Declare a Label component
+   private TextField tfCount; // Declare a TextField component
+   private Button btnCount;   // Declare a Button component
+   private int count = 0;     // Counter's value
+
+   // Constructor to setup GUI components and event handlers
+   public AWTCounter () {
+      setLayout(new FlowLayout());
+         // "super" Frame, which is a Container, sets its layout to FlowLayout to arrange
+         // the components from left-to-right, and flow to next row from top-to-bottom.
+
+      lblCount = new Label("Counter");  // construct the Label component
+      add(lblCount);                    // "super" Frame container adds Label component
+
+      tfCount = new TextField(count + "", 10); // construct the TextField component with initial text
+      tfCount.setEditable(false);       // set to read-only
+      add(tfCount);                     // "super" Frame container adds TextField component
+
+      btnCount = new Button("Count");   // construct the Button component
+      add(btnCount);                    // "super" Frame container adds Button component
+
+      BtnCountListener listener = new BtnCountListener();
+      btnCount.addActionListener(listener);
+         // "btnCount" is the source object that fires an ActionEvent when clicked.
+         // The source object adds an instance of BtnCountListener as an ActionEvent listener,
+         //   which provides an ActionEvent handler called actionPerformed().
+         // Clicking "Count" button calls back actionPerformed().
+
+      setTitle("AWT Counter");  // "super" Frame sets its title
+      setSize(300, 100);        // "super" Frame sets its initial window size
+
+      // For inspecting the Container/Components objects
+      // System.out.println(this);
+      // System.out.println(lblCount);
+      // System.out.println(tfCount);
+      // System.out.println(btnCount);
+      setVisible(true);         // "super" Frame shows
+      // System.out.println(this);
+      // System.out.println(lblCount);
+      // System.out.println(tfCount);
+      // System.out.println(btnCount);
+   }
+
+   // The entry main() method
+   public static void main(String[] args) {
+      // Invoke the constructor to setup the GUI, by allocating an instance
+      AWTCounter app = new AWTCounter();
+         // or simply "new AWTCounter();" for an anonymous instance
+   }
+
+   // Define an inner class to handle the "Count" button-click
+   private class BtnCountListener implements ActionListener {
+      // ActionEvent handler - Called back upon button-click.
+      @Override
+      public void actionPerformed(ActionEvent evt) {
+         ++count; // Increase the counter value
+         // Display the counter value on the TextField tfCount
+         tfCount.setText(count + ""); // Convert int to String
+      }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+*********************************************************************** 6 *************************************************************************************
+6. Design a Java applet which is a graphics program run inside a browser. Write a Java applet (called AWTAccumulatorApplet) which contains:  a label "Enter an integer:"  a TextField for user to enter a number.  The applet shall accumulate all the integers entered and show it on the status bar of the browser's window.
+
+import java.applet.Applet;
+import java.awt.*;        // Using AWT's containers and components
+import java.awt.event.*;  // Using AWT's event classes and listener interfaces
+ 
+// An applet extends java.applet.Applet
+public class AWTAccumulatorApplet extends Applet implements ActionListener {
+   private TextField tfInput;   // The input TextField
+   private int sum = 0;         // The accumulated sum, init to 0
+ 
+   // init() runs when the applet is loaded. Setup the UI components and event handlers.
+   public void init() {
+      add(new Label("Enter an integer"));  // anonymous Label
+ 
+      tfInput = new TextField(10);
+      add(tfInput);
+      tfInput.addActionListener(this);
+         // Hitting enter key on tfInput invokes actionPerformed()
+   }
+ 
+   // ActionEvent handler - Called back when enter key was hit on TextField.
+   public void actionPerformed( ActionEvent evt) {
+      int numberIn = Integer.parseInt(evt.getActionCommand());
+         // getActionCommand() returns the String entered.
+      sum += numberIn;
+      tfInput.setText("");  // Clear input TextField
+      showStatus("The accumulated sum is: " + sum);
+         // show the sum on the status bar of the browser's window
+   }
+}
+AWTAccumulatorApplet.html
+<html>
+<head>
+  <title>An AWT Applet</title>
+</head>
+<body>
+  <p>A simple applet which accumulates the number entered into
+  a TextField and displays the accumulated sum on the status bar</p>
+  <applet code="AWTAccumulatorApplet.class" width="300" height="60">
+  </applet>
+</body>
+</html>
+
+
+
+
+
+*********************************************************************** 7 *************************************************************************************
+7. Write a Swing application called SwingAdder as shown. The 1. "ADD" 2. “SUB” button adds the two integers and display the result. The "CLEAR" button shall clear all the text fields.
+
+->
+import java.awt.*;        // Using AWT's layouts
+import java.awt.event.*;  // Using AWT's event classes and listener interfaces
+import javax.swing.*;     // Using Swing's components and container
+//A Swing application extends from javax.swing.JFrame
+public class swingadder extends JFrame {
+	 JTextField tfNumber1, tfNumber2, tfResult;
+	    JButton btnAdd,btnSub, btnClear;
+	   int number1, number2, result;
+	   String s1;
+	// Constructor to set up UI components and event handlers
+	   public swingadder() {
+		// Swing components should be added to the content-pane of the JFrame.
+		      Container cp = getContentPane();
+		      // Set this Container to grid layout of 4 rows and 2 columns
+		      cp.setLayout(new GridLayout(4, 2, 10, 3));
+		 
+		      // Components are added from left-to-right, top-to-bottom
+		      cp.add(new JLabel("First Number "));     // at (1, 1)
+		      tfNumber1 = new JTextField();
+		      tfNumber1.setHorizontalAlignment(JTextField.RIGHT);
+		      cp.add(tfNumber1); 
+		      cp.add(new JLabel("Second Number ")); 
+		      tfNumber2 = new JTextField();
+		      tfNumber2.setHorizontalAlignment(JTextField.RIGHT);
+		      cp.add(tfNumber2);
+		      cp.add(new JLabel("Result "));     // at (1, 1)
+		      tfResult = new JTextField();
+		      tfResult.setHorizontalAlignment(JTextField.RIGHT);
+		      cp.add(tfResult); 
+		     
+		      
+		      // at (1, 2)
+		      btnAdd = new JButton("ADD");
+		      cp.add(btnAdd);                         // at (4, 1)
+		      btnAdd.addActionListener(new ActionListener() {
+		         @Override
+		         public void actionPerformed(ActionEvent evt) {
+		            number1 = Integer.parseInt(tfNumber1.getText());
+		            number2 = Integer.parseInt(tfNumber2.getText());
+		            result=number1+number2;
+		            s1=String.valueOf(result);
+		            tfResult.setText(s1);  
+		         }
+		      });
+		      btnSub = new JButton("SUB");
+		      cp.add(btnSub);                         // at (4, 1)
+		      btnSub.addActionListener(new ActionListener() {
+		 
+		         public void actionPerformed(ActionEvent evt) {
+		            number1 = Integer.parseInt(tfNumber1.getText());
+		            number2 = Integer.parseInt(tfNumber2.getText());
+		            result=number1-number2;
+		            s1=String.valueOf(result);
+		            tfResult.setText(s1);  
+		         }
+		      });
+		      btnClear = new JButton("CLEAR");
+		      cp.add(btnClear);                          // at (4, 2)
+		      btnClear.addActionListener(new ActionListener() {
+		        
+		         public void actionPerformed(ActionEvent evt) {
+		        	 tfNumber1.setText("");
+		        	 tfNumber2.setText("");
+		        	 tfResult.setText("");
+		         }
+		      });
+		      
+		      setTitle("Swing Adder");
+		      setSize(300, 170);
+		      setVisible(true);
+		      
+	   }
+	   public static void main(String[] args) {
+		            new swingadder(); // Let the constructor does the job
+		         }     
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************************** 8 *************************************************************************************
+8. Design a GUI which accepts US currency & converts it to Indian Rupees, Euros, Yuan. 
+->
+// Java program to convert from
+// rupee to the dollar and vice-versa
+// using Java Swing
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class GFG {
+
+	// Function to convert from rupee
+	// to the dollar and vice-versa
+	// using Java Swing
+	public static void converter()
+	{
+
+		// Creating a new frame using JFrame
+		JFrame f = new JFrame("CONVERTER");
+
+		// Creating two labels
+		JLabel l1, l2;
+
+		// Creating two text fields.
+		// One for rupee and one for
+		// the dollar
+		JTextField t1, t2;
+
+		// Creating three buttons
+		JButton b1, b2, b3;
+
+		// Naming the labels and setting
+		// the bounds for the labels
+		l1 = new JLabel("Rupees:");
+		l1.setBounds(20, 40, 60, 30);
+		l2 = new JLabel("Dollars:");
+		l2.setBounds(170, 40, 60, 30);
+
+		// Initializing the text fields with
+		// 0 by default and setting the
+		// bounds for the text fields
+		t1 = new JTextField("0");
+		t1.setBounds(80, 40, 50, 30);
+		t2 = new JTextField("0");
+		t2.setBounds(240, 40, 50, 30);
+
+		// Creating a button for INR,
+		// one button for the dollar
+		// and one button to close
+		// and setting the bounds
+		b1 = new JButton("INR");
+		b1.setBounds(50, 80, 60, 15);
+		b2 = new JButton("Dollar");
+		b2.setBounds(190, 80, 60, 15);
+		b3 = new JButton("close");
+		b3.setBounds(150, 150, 60, 30);
+
+		// Adding action listener
+		b1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				// Converting to double
+				double d
+					= Double.parseDouble(t1.getText());
+
+				// Converting rupees to dollars
+				double d1 = (d / 65.25);
+
+				// Getting the string value of the
+				// calculated value
+				String str1 = String.valueOf(d1);
+
+				// Placing it in the text box
+				t2.setText(str1);
+			}
+		});
+
+		// Adding action listener
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				// Converting to double
+				double d2
+					= Double.parseDouble(t2.getText());
+
+				// converting Dollars to rupees
+				double d3 = (d2 * 65.25);
+
+				// Getting the string value of the
+				// calculated value
+				String str2 = String.valueOf(d3);
+
+				// Placing it in the text box
+				t1.setText(str2);
+			}
+		});
+
+		// Action listener to close the form
+		b3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				f.dispose();
+			}
+		});
+
+		// Default method for closing the frame
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e)
+			{
+				System.exit(0);
+			}
+		});
+
+		// Adding the created objects
+		// to the form
+		f.add(l1);
+		f.add(t1);
+		f.add(l2);
+		f.add(t2);
+		f.add(b1);
+		f.add(b2);
+		f.add(b3);
+
+		f.setLayout(null);
+		f.setSize(400, 300);
+		f.setVisible(true);
+	}
+
+	// Driver code
+	public static void main(String args[])
+	{
+		converter();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************************** 9 *************************************************************************************
+9. Develop a GUI which accepts the information regarding the marks for all the subjects of a student in the examination. Display the result for a student in a separate window.
+->
+
+Program
+import java.awt.*;
+     import java.applet.*;
+     import java.awt.event.*;
+ /* <applet code="Stupanel" width=400 height=400>
+    </applet> */
+   
+    public class Stupanel extends Applet implements    ActionListener,ItemListener
+     {
+             String s1,s2,s3;
+             TextField t3,t4,t5,t6,t7;
+             Button tot,avg;
+             Checkbox c1,c2,c3,c4,m,f;
+             CheckboxGroup cbg;
+              Panel p1,p2,p3,p4;
+
+              public void init()
+             {
+                  s3=" ";
+                  tot=new Button("Total");
+                  avg=new Button("Average");
+                 c1=new Checkbox("MCA",true);
+                 c2=new Checkbox("Msc Comp");
+                 c3=new Checkbox("MSIT");
+                 c4=new Checkbox("MSIS");
+
+                 cbg=new CheckboxGroup();
+
+                 m=new Checkbox("Male",cbg,false);
+                 f=new Checkbox("Female",cbg,true);
+                 p1=new Panel();
+                 p1.setLayout(new GridLayout(2,2));
+
+                 p1.add(new Label("Student Number "));
+                 p1.add(new TextField(5));
+
+                 p1.add(new Label("Student Name "));
+                 p1.add(new TextField(15));
+             
+
+
+      add(p1);
+      p2=new Panel(); p2.setLayout(new GridLayout(1,3));
+      p2.add(new Label("Gender"));
+      p2.add(m);
+      p2.add(f);
+      add(p2);  
+
+       p3=new Panel(); p3.setLayout(new GridLayout(1,5));
+       p3.add(new Label("Degree"));
+       p3.add(c1);   p3.add(c2);     p3.add(c3);      p3.add(c4);
+
+       add(p3);
+
+        p4=new Panel(); p4.setLayout(new GridLayout(6,2));
+        p4.add(new Label("Marks in JAVA"));
+       t3=new TextField(3);    p4.add(t3);
+
+       p4.add(new Label("Marks in VB .Net"));
+       t4=new TextField(3); p4.add(t4);
+
+       p4.add(new Label("Marks In C"));
+       t5=new TextField(3); p4.add(t5);    
+
+       p4.add(new Label("Total "));
+       t6=new TextField(3); p4.add(t6);    
+
+       p4.add(new Label(" Average"));
+       t7=new TextField(3); p4.add(t7);    
+
+        p4.add(tot);   p4.add(avg);
+
+        tot.addActionListener(this);
+        avg.addActionListener(this);
+
+        c1.addItemListener(this);
+        c2.addItemListener(this);
+     
+
+
+        c3.addItemListener(this);
+        c4.addItemListener(this);
+        m.addItemListener(this);
+        f.addItemListener(this);
+
+       
+  add(p4);
+      }
+
+ 
+    public void paint(Graphics g)
+      {
+         int no,m1,m2,m3,tot;
+         float avg=0.0f;
+         no=m1=m2=m3=tot=0;
+         try
+         {
+            m1=Integer.parseInt(t3.getText());
+            m2=Integer.parseInt(t4.getText());
+            m3=Integer.parseInt(t5.getText());
+         }
+         catch(Exception e)
+         {
+         }
+         tot=m1+m2+m3;
+         avg= tot/3;
+         s1=String.valueOf(tot);
+         s2=String.valueOf(avg);
+     }
+
+      public boolean action(Event e,Object o)
+      {
+        repaint();
+        return true;
+      }
+
+      public void actionPerformed(ActionEvent e)
+      {
+         s3=e.getActionCommand();
+         if(s3.equals("Total"))
+           t6.setText(s1);
+         if(s3.equals("Average"))
+           t7.setText(s2);
+           repaint();
+      }
+        public void itemStateChanged(ItemEvent e)
+      {
+         repaint();
+       }
+ }
+
+
+
+
+
+
+
+
+
+*********************************************************************** 10 *************************************************************************************
+10. Design VoteDialog, i.e. the user casts a vote by selecting a radio button and clicking the Vote button. After the button is clicked, a dialog appears with an informational message or a follow-up question
+->
+//10votedialog
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+public class voteballot extends JFrame{
+	JRadioButton rb1,rb2,rb3;
+	JButton btnvote;
+	JLabel L1;
+	ButtonGroup G1;
+	public voteballot() {
+		this.setLayout(null);
+		  
+        // Initialization of object of "JRadioButton" class.
+        rb1 = new JRadioButton();
+  
+        // Initialization of object of "JRadioButton" class.
+        rb2 = new JRadioButton();
+        
+        // Initialization of object of "JRadioButton" class.
+        rb3 = new JRadioButton();
+        
+        G1 = new ButtonGroup();
+        
+        // Initialization of object of "JButton" class.
+        btnvote = new JButton("Click");
+        
+        L1 = new JLabel("Voting");
+        
+     // Setting text of "jRadioButton1".
+        rb1.setText("Party One");
+  
+        // Setting text of "jRadioButton2".
+        rb2.setText("Party Two");
+        
+        // Setting text of "jRadioButton3".
+        rb3.setText("Party Three");
+        
+     // Setting Bounds of "jRadioButton1".
+        rb1.setBounds(120, 30, 120, 50);
+  
+        // Setting Bounds of "jRadioButton2".
+        rb2.setBounds(250, 30, 80, 50);
+        
+     // Setting Bounds of "jRadioButton3".
+        rb3.setBounds(300, 30, 60, 50);
+        
+     // Setting Bounds of "jButton".
+        btnvote.setBounds(125, 90, 80, 30);
+  
+        // Setting Bounds of JLabel "L2".
+        L1.setBounds(20, 30, 150, 50);
+        
+     // "this" keyword in java refers to current object.
+        // Adding "jRadioButton2" on JFrame.
+        this.add(rb1);
+  
+        // Adding "jRadioButton4" on JFrame.
+        this.add(rb2);
+   
+     // Adding "jRadioButton4" on JFrame.
+        this.add(rb3);
+        
+        // Adding "jButton" on JFrame.
+        this.add(btnvote);
+  
+        // Adding JLabel "L2" on JFrame.
+        this.add(L1);
+        
+     // Adding "jRadioButton1" and "jRadioButton3" in a Button Group "G2".
+        G1.add(rb1);
+        G1.add(rb2);
+        G1.add(rb3);
+	
+	 
+//Adding Listener to JButton.
+btnvote.addActionListener(new ActionListener() {
+    // Anonymous class.
+
+    public void actionPerformed(ActionEvent e)
+    {
+        
+
+        // Declaration of String class Objects.
+        String vote = " ";
+
+        // If condition to check if jRadioButton2 is selected.
+        if (rb1.isSelected()) {
+
+            vote = "PARTY ONE";
+        }
+
+        else if (rb2.isSelected()) {
+
+            vote = "PARTY TWO";
+        }
+        else if (rb3.isSelected()) {
+        	vote = "PARTY THREE";
+        }
+        else {
+
+            vote = "NO party selected";
+        }
+     // MessageDialog to show information selected radion buttons.
+        JOptionPane.showMessageDialog(voteballot.this, vote);
+    }
+});
+}
+ }
+class RadioButton {
+    // Driver code.
+    public static void main(String args[])
+    { // Creating object of demo class.
+        voteballot f = new voteballot();
+  
+        // Setting Bounds of JFrame.
+        f.setBounds(100, 100, 400, 200);
+  
+        // Setting Title of frame.
+        f.setTitle("RadioButtons");
+  
+        // Setting Visible status of frame as true.
+        f.setVisible(true);
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************************** 11 *************************************************************************************
+
+11. Develop an RMI application which accepts a string or a number and checks that string or number is palindrome or not.
+->
+one.java
+import java.rmi.*;
+interface one extends Remote
+{
+
+    public int palin(String a) throws RemoteException;
+}
+
+two.java
+import java.rmi.*;
+import java.lang.*;
+import java.rmi.server.*;
+public class two extends UnicastRemoteObject implements one
+{
+    public two() throws RemoteException { }
+    public int palin(String a) throws RemoteException
+    {
+        System.out.println("Hello");
+        StringBuffer str = new StringBuffer(a);
+        String str1 = str.toString();
+        System.out.println("Print : " + str1.toString());
+        StringBuffer str2 = str.reverse();
+        System.out.println("Print : " + str2.toString());
+        int b = str1.compareTo(str2.toString());
+        System.out.println("Print : " + b);
+        if (b == 0)
+            return 1;
+        else
+            return 0;
+    }
+}
+
+rmiserver.java
+import java.io.*;
+import java.rmi.*;
+import java.net.*;
+public class rmiserver
+{
+    public static void main(String args[]) throws Exception
+    {
+        try
+        {
+            two twox = new two();
+            Naming.bind("palin", twox);
+            System.out.println("Object registered");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Exception" + e);
+        }
+    }
+}
+
+rmiclient.java
+import java.io.*;
+import java.rmi.*;
+import java.net.*;
+public class rmiclient
+{
+    public static void main(String args[]) throws Exception
+    {
+        try
+        {
+            String s1 = "rmi://localhost/palin";
+            one onex = (one)Naming.lookup(s1);
+            int m = onex.palin("madam");
+            System.out.println("Print : " + m);
+            if (m == 1)
+            {
+                System.out.println("The given string is a Palindrome");
+            }
+            else
+            {
+                System.out.println("The given string is not a Palindrome");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception" + e);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************************** 12 *************************************************************************************
+
+12. Write a database application that uses any JDBC driver.
+->
+package com.vinayak.jdbc;
+
+import java.sql.*;
+
+public class JDBCDemo {
+	
+	public static void main(String args[])
+		throws SQLException, ClassNotFoundException
+	{
+		String driverClassName
+			= "sun.jdbc.odbc.JdbcOdbcDriver";
+		String url = "jdbc:odbc:XE";
+		String username = "scott";
+		String password = "tiger";
+		String query
+			= "insert into students values(109, 'bhatt')";
+
+		// Load driver class
+		Class.forName(driverClassName);
+
+		// Obtain a connection
+		Connection con = DriverManager.getConnection(
+			url, username, password);
+
+		// Obtain a statement
+		Statement st = con.createStatement();
+
+		// Execute the query
+		int count = st.executeUpdate(query);
+		System.out.println(
+			"number of rows affected by this query= "
+			+ count);
+
+		// Closing the connection as per the
+		// requirement with connection is completed
+		con.close();
+	}
+} 
+
+
+
+
+*********************************************************************** 13 *************************************************************************************
+
+13. Write a simple JSP page to display a simple message (It may be a simple html page).
+->
+<html>  
+<body>  
+<% out.print(2*5); %>  
+</body>  
+</html>  
+
